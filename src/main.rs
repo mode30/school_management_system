@@ -1,5 +1,5 @@
 use core::fmt;
-use std::io::{self};
+use std::io::{self, ErrorKind};
 
 // #[derive(Debug,Default)]
 // enum Departments {
@@ -56,6 +56,7 @@ struct Staff {
     person: Person,
     department: String,
     salary: f64,
+    area: Vec<String>,
 }
 
 fn main() {
@@ -210,26 +211,27 @@ impl Student {
 
 #[allow(dead_code)]
 impl Staff {
-    fn new(person: Person, department: String, salary: f64) -> Self {
+    fn new(person: Person, department: String, salary: f64, area: Vec<String>) -> Self {
         Self {
             person,
             department,
             salary,
+            area,
         }
     }
-    fn staff_name(&self) -> &str {
-        &self.person.name
-    }
-    fn staff_id(&self) -> u32 {
-        self.person.id
-    }
-    fn staff_role(&self) -> Role {
-        self.person.role.clone()
-    }
+    // fn staff_name(&self) -> &str {
+    //     &self.person.name
+    // }
+    // fn staff_id(&self) -> u32 {
+    //     self.person.id
+    // }
+    // fn staff_role(&self) -> Role {
+    //     self.person.role.clone()
+    // }
 
-    fn introduce(self) {
-        println!("infomation:{}", self)
-    }
+    // fn introduce(self) {
+    //     println!("infomation:{}", self)
+    // }
 }
 
 impl Default for Person {
@@ -323,7 +325,43 @@ trait Areas {
 }
 
 impl Areas for Staff {
-    fn any_search_areas(&self, area_search: String) -> Result<(), io::Error> {}
+    fn search_areas(&self, area_search: String) -> Result<(), io::Error> {
+        let area_searched = self
+            .area
+            .iter()
+            .find(|&search_parameter| *search_parameter == area_search);
+        match area_searched {
+            Some(found) => {
+                println!("found area:{}:user_input{}", found, area_search);
+                Ok(())
+            }
+            None => {
+                println!("not found:{}", area_search);
+
+                Err(io::Error::new(
+                    io::ErrorKind::NotFound,
+                    "input doesnt exist".to_string(),
+                ))
+            }
+        }
+    }
+
+    fn any_search_areas(&self, area_search: String) -> Result<(), io::Error> {
+        let area_search_result = self
+            .area
+            .iter()
+            .any(|search_parameter| *search_parameter == area_search);
+        if area_search_result {
+            println!("found:{}", area_search);
+            Ok(())
+        } else {
+            println!("not found:{}", area_search);
+            Err(io::Error::new(
+                io::ErrorKind::NotFound,
+                "cannot find search parameter".to_owned(),
+            ))
+        }
+    }
 }
 impl Areas for Student {
     fn search_areas(&self, area_search: String) -> Result<(), io::Error> {
@@ -344,7 +382,25 @@ impl Areas for Student {
         }
     }
     fn any_search_areas(&self, area_search: String) -> Result<(), io::Error> {
-
+        let area_search_result = self
+            .area
+            .iter()
+            .any(|search_parameter| *search_parameter == area_search);
+        if area_search_result {
+            println!("found:{}", area_search);
+            Ok(())
+        } else {
+            println!("not found");
+            Err(io::Error::new(io::ErrorKind::NotFound, "nan".to_string()))
+        }
+        // match area_search_result {
+        //     Ok(found) => {
+        //     }
+        //     Err(e) => {
+        //         println!("{}", e);
+        //         Err(io::Error::new(io::ErrorKind::NotFound, "nan".to_string()))
+        //     }
+        // }
     }
 }
 
