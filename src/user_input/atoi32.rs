@@ -1,6 +1,8 @@
 // use core::fmt;
 use crate::user_input::user_input;
 use std::io::{self};
+
+#[allow(dead_code)]
 fn atoi32() -> Result<i32, io::Error> {
     let buffer = user_input::user_input("enter number")?;
     let buffer: i32 = buffer

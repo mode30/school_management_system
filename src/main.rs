@@ -1,5 +1,5 @@
 use core::fmt;
-use std::io::{self, ErrorKind};
+use std::io::{self};
 
 // #[derive(Debug,Default)]
 // enum Departments {
@@ -61,7 +61,7 @@ struct Staff {
 
 fn main() {
     // let person_1 = Person::new_person("benjamin".to_owned(), 1);
-    let _student_areas = vec![
+    let mut _student_areas = vec![
         String::from("Mess hall"),
         String::from("Bathroom"),
         String::from("Toilet"),
@@ -69,8 +69,10 @@ fn main() {
         String::from("Club hall"),
         String::from("Doctors office"),
     ];
+    _student_areas.push("Club House".to_owned());
+    _student_areas.push("Principal office".to_owned());
 
-    let _staffs_areas = vec![
+    let mut _staffs_areas = vec![
         String::from("Mess hall"),
         String::from("Bathroom"),
         String::from("Toilet"),
@@ -78,7 +80,10 @@ fn main() {
         String::from("Club hall"),
         String::from("Doctors office"),
     ];
-    let _teacher_areas = vec![
+    _staffs_areas.push("Garage".to_owned());
+    _staffs_areas.push("Principals office".to_owned());
+
+    let mut _teacher_areas = vec![
         String::from("Mess hall"),
         String::from("Bathroom"),
         String::from("Toilet"),
@@ -86,6 +91,8 @@ fn main() {
         String::from("Club hall"),
         String::from("Doctors office"),
     ];
+    _teacher_areas.push("Laboratory".to_string());
+
     let person_1 = Person::default();
     println!("{:?}", person_1);
 
@@ -161,9 +168,7 @@ impl Student {
     fn display_areas(&self) {
         println!("areas to explore:{:#?}", self.area)
     }
-    // fn can_access(&self,areas:Vec<String>,area_name:String)->Result<Option<bool>,io::Error>{
-    // fn can_access(&self,areas:Vec<String>,area_name:String)->Result<Option<String>,io::Error>{
-    // fn can_access(&self,areas:Vec<String>,area_name:String)->Result<bool,io::Error>{
+
     fn can_access(&self, area_name: String) -> Result<(), io::Error> {
         if area_name.is_empty() {
             return Err(io::Error::new(
@@ -189,24 +194,7 @@ impl Student {
                 ))
             }
         }
-
-        // print!("found:{}\n",result);
-        // std::io::stdout().flush()?;
-
-        // result(area_name)
     }
-    // fn student_name(&self) -> &str {
-    //     &self.person.name
-    // }
-    // fn student_id(&self) -> u32 {
-    //     self.person.id
-    // }
-    // fn student_role(&self) -> Role {
-    //     self.person.role.clone()
-    // }
-    // fn introduce(&self) {
-    //     println!("{}", self)
-    // }
 }
 
 #[allow(dead_code)]
@@ -219,19 +207,6 @@ impl Staff {
             area,
         }
     }
-    // fn staff_name(&self) -> &str {
-    //     &self.person.name
-    // }
-    // fn staff_id(&self) -> u32 {
-    //     self.person.id
-    // }
-    // fn staff_role(&self) -> Role {
-    //     self.person.role.clone()
-    // }
-
-    // fn introduce(self) {
-    //     println!("infomation:{}", self)
-    // }
 }
 
 impl Default for Person {
@@ -393,14 +368,6 @@ impl Areas for Student {
             println!("not found");
             Err(io::Error::new(io::ErrorKind::NotFound, "nan".to_string()))
         }
-        // match area_search_result {
-        //     Ok(found) => {
-        //     }
-        //     Err(e) => {
-        //         println!("{}", e);
-        //         Err(io::Error::new(io::ErrorKind::NotFound, "nan".to_string()))
-        //     }
-        // }
     }
 }
 
@@ -455,3 +422,35 @@ impl PersonInformation for Teacher {
 // impl PersonInformation for Staff{
 
 // }
+
+// #[allow(dead_code)]
+// fn print_information<T>(person_type: &T)
+//     where
+//     T:PersonInformation + Clone
+// {
+
+//     println!(
+//         "person name:{}\nperson id:\nperson courses:{},department:{}roles:{}",
+//         person_type.name,
+//         person_type.id,
+//         person_type.courses,
+//         person_type.department,
+//         person_type.roles
+//     )
+// }
+
+// fn check_exsit<T:Area>(person_type: &T)->bool{
+//     let result=
+// }
+
+// fn print_id_card(&self);
+// fn name(&self) -> &str;
+// fn id(&self) -> u32;
+// fn courses(&self) -> Vec<String>;
+// fn department(&self) -> String;
+// fn roles(&self) -> Role;
+
+
+
+    // fn search_areas(&self, area_search: String) -> Result<(), io::Error>;
+    // fn any_search_areas(&self, area_search: String) -> Result<(), io::Error>;

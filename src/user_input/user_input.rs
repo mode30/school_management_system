@@ -1,4 +1,6 @@
 use std::io::{self};
+
+#[allow(dead_code)]
 pub fn user_input(prompt: &str) -> Result<String, io::Error> {
     println!(":{}", prompt);
     let mut user_input = String::new();
