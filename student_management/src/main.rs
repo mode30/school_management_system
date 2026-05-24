@@ -133,7 +133,7 @@ impl Teacher {
         }
     }
 
-    fn teacher_name(&self) -> &str {
+    fn teacher_name(&'a self) -> &'a str {
         &self.person.name
     }
     // fn teacher_id(&self) -> u32 {
@@ -375,7 +375,7 @@ impl PersonInformation for Staff {
     fn print_id_card(&self) {
         println!("id information:{}", self)
     }
-    fn name(&self) -> &str {
+    fn name(&'a self) -> &'a str {
         &self.person.name
         // format!("Teacher name:{}",&self.person.name)
     }
@@ -398,7 +398,7 @@ impl PersonInformation for Teacher {
     fn print_id_card(&self) {
         println!("id information:{}", self)
     }
-    fn name(&self) -> &str {
+    fn name(&'a self) -> &'a str {
         &self.person.name
         // format!("Teacher name:{}",&self.person.name)
     }

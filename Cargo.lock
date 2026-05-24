@@ -9,3 +9,7 @@ version = "0.1.0"
 [[package]]
 name = "school_management_system_demo"
 version = "0.1.0"
+
+[[package]]
+name = "testing"
+version = "0.1.0"

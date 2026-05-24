@@ -1,8 +1,9 @@
-use core::fmt;
+
 // use core::fmt;
 use std::collections::HashMap;
 #[allow(dead_code)]
 
+#[derive(Debug)]
 struct Students {
     name:String,
     //string -> courses:options<u8>-> grades
@@ -19,6 +20,8 @@ fn main() {
     person_1.add_grade("jonathan".to_owned(), Some(11));
     person_1.add_grade("kanyinsola".to_string(), Some(88));
 
+    println!("{:?}",person_1);
+
 }
 
 #[allow(dead_code)]
@@ -34,16 +37,16 @@ impl Students {
     fn add_grade(&mut self, _course: String, _grade: Option<u8>) {
         self.grades.insert(_course, _grade);
     }
-    fn display_information(&self){
+    // fn display_information(&self){
 
-    }
+    // }
 }
 
-impl fmt::Display for Students{
-    fn fmt (&self,f:&mut fmt::Formatter<'_>) ->fmt::Result{
-        write!(f,"information:names{}\ngrades:{}",self.name,self.grades)
-    }
-}
+// impl fmt::Display for Students{
+//     fn fmt (&self,f:&mut fmt::Formatter<'_>) ->fmt::Result{
+//         write!(f,"information:names{}\ngrades:{}",self.name,self.grades)
+//     }
+// }
 
 // impl Students{
 //     fn new() -> Self {

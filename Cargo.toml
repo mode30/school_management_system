@@ -1,6 +1,6 @@
 [workspace]
 members = [
     "student_management",
-    "grading-system",
+    "grading-system", "testing",
 ]
 resolver = "2"
